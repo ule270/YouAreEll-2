@@ -66,9 +66,9 @@ public class Message implements Comparable {
         this.fromId = fromId;
     }
 
-    public String getTimestamp() {
-        return timestamp;
-    }
+//    public String getTimestamp() {
+//        return timestamp;
+//    }
 
     public String getSeqId() {
         return seqId;
