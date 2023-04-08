@@ -16,16 +16,18 @@ public class YouAreEll {
             new TransactionController(
                 new MessageController(), new IdController()
         ));
-        System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
-        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
+//        System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
+//        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
     }
 
     public String get_ids() {
-        return tt.makecall("/ids", "GET", "");
+        return null;
+//        return tt.makecall("/ids", "GET", "");
     }
 
     public String get_messages() {
-        return MakeURLCall("/messages", "GET", "");
+        return null;
+//        return MakeURLCall("/messages", "GET", "");
     }
 
 

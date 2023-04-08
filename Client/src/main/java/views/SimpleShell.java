@@ -21,7 +21,7 @@ public class SimpleShell {
     }
     public static void main(String[] args) throws java.io.IOException {
 
-        YouAreEll urll = new YouAreEll(new MessageController(), new IdController());
+//        YouAreEll urll = new YouAreEll(new MessageController(), new IdController());
         
         String commandLine;
         BufferedReader console = new BufferedReader
@@ -56,18 +56,18 @@ public class SimpleShell {
             }
             System.out.print(list); //***check to see if list was added correctly***
             history.addAll(list);
-            try {
-                //display history of shell with index
-                if (list.get(list.size() - 1).equals("history")) {
-                    for (String s : history)
-                        System.out.println((index++) + " " + s);
-                    continue;
-                }
+//            try {
+//                //display history of shell with index
+//                if (list.get(list.size() - 1).equals("history")) {
+//                    for (String s : history)
+//                        System.out.println((index++) + " " + s);
+//                    continue;
+//                }
 
                 // Specific Commands.
 
                 // ids
-                if (list.contains("ids")) {
+                 /* if (list.contains("ids")) {
                     String results = webber.get_ids();
                     SimpleShell.prettyPrint(results);
                     continue;
@@ -79,6 +79,7 @@ public class SimpleShell {
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
+                 */
                 // you need to add a bunch more.
 
                 //!! command returns the last command in history
@@ -109,12 +110,12 @@ public class SimpleShell {
                 // br.close();
 
 
-            }
+//            }
 
             //catch ioexception, output appropriate message, resume waiting for input
-            catch (IOException e) {
-                System.out.println("Input Error, Please try again!");
-            }
+//            catch (IOException e) {
+//                System.out.println("Input Error, Please try again!");
+//            }
             // So what, do you suppose, is the meaning of this comment?
             /** The steps are:
              * 1. parse the input to obtain the command and any parameters
