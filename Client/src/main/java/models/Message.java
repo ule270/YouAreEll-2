@@ -39,6 +39,7 @@ public class Message implements Comparable {
     }
 
     public int compareTo(Object o) {
+
         return this.seqId.compareTo(((Message) o).getSeqId());
     }
 
@@ -71,6 +72,7 @@ public class Message implements Comparable {
 //    }
 
     public String getSeqId() {
+
         return seqId;
     }
 }

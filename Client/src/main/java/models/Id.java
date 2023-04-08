@@ -16,9 +16,9 @@ public class Id {
         return userid;
     }
 
-//    public void setuserid(String userid) {
-//        this.userid = userid;
-//    }
+    public void setuserid(String userid) {
+        this.userid = userid;
+    }
 
     public String getName() {
         return name;

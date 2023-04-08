@@ -23,15 +23,34 @@ public class IdController {
     Id myId;
 
     public ArrayList<Id> getIds() {
-        ArrayList <Id> Ids = new ArrayList<>();
-        for(Map.Entry<String, Id> entry: allIds.entrySet()) {
-            Ids.add(entry.getValue());
+        try {
+            HttpRequest request = (HttpRequest) HttpRequest.newBuilder()
+                    .uri(new URI("http://zipcode.rocks:8085/ids"))
+                    .GET()
+                    .build();
+            HttpResponse<String> response = HttpClient
+                    .newBuilder()
+                    .build()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+//            System.out.println(response);
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            String body = response.body();
+            List<Id> idList = objectMapper.readValue(body, new TypeReference<List<Id>>() {
+            });
+            return (ArrayList<Id>) idList;
+//            System.out.println(idList.size());
+//            for (int i =0; i < idList.size(); i++){
+//                System.out.println(idList.get(i).toString()+ "");
+//            }
+        } catch (Exception e) {
+            System.out.printf("error" + e);
         }
-        return Ids;
+        return null;
     }
 
     public Id postId(Id id) {
-
         // create json from id
         // call server, get json result Or error
         // result json to Id obj
@@ -44,54 +63,51 @@ public class IdController {
     }
 
     public static void main(String[] args){
-        try {
-            HttpRequest request = (HttpRequest) HttpRequest.newBuilder()
-                    .uri(new URI("http://zipcode.rocks:8085/ids"))
-                    .GET()
-                    .build();
-            HttpResponse<String> response = HttpClient
-                    .newBuilder()
-                    .build()
-                    .send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response);
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-            String body = response.body();
-            System.out.println(body);
-
-//            IdController control = new IdController();
-////            System.out.println(control.getIds());
-//            ArrayList <Id> idList = control.getIds();
-            List <Id> idList = objectMapper.readValue(body, new TypeReference<List<Id>>(){});
-            System.out.println(idList.size());
-            for (int i =0; i < idList.size(); i++){
-                System.out.println(idList.get(i).toString()+ "");
-            }
-
-        } catch (Exception e) {
-            System.out.printf("error" + e);
-
-        }
-        try {
-            ObjectMapper maps = new ObjectMapper();
-            String hello = "hello";
-            String fromId = "ule270";
-            String toId = "ChristaR";
-            Message mess = new Message(hello, fromId, toId);
-            String message = maps.writeValueAsString(mess);
-            HttpRequest request1 = (HttpRequest) HttpRequest.newBuilder()
-                    .uri(new URI("http://zipcode.rocks:8085/ids/ule/messages"))
-                    .POST(HttpRequest.BodyPublishers.ofString(message))
-                    .build();
-            HttpResponse<String> response1 = HttpClient
-                .newBuilder()
-                .build()
-                .send(request1, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response1.body());
-        } catch (Exception e) {
-            System.out.printf("error" + e);
-
-        }
+//        try {
+//            HttpRequest request = (HttpRequest) HttpRequest.newBuilder()
+//                    .uri(new URI("http://zipcode.rocks:8085/ids"))
+//                    .GET()
+//                    .build();
+//            HttpResponse<String> response = HttpClient
+//                    .newBuilder()
+//                    .build()
+//                    .send(request, HttpResponse.BodyHandlers.ofString());
+//            System.out.println(response);
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//
+//            String body = response.body();
+//            System.out.println(body);
+//
+//            List <Id> idList = objectMapper.readValue(body, new TypeReference<List<Id>>(){});
+//            System.out.println(idList.size());
+//            for (int i =0; i < idList.size(); i++){
+//                System.out.println(idList.get(i).toString()+ "");
+//            }
+//
+//        } catch (Exception e) {
+//            System.out.printf("error" + e);
+//
+//        }
+//        try {
+//            ObjectMapper maps = new ObjectMapper();
+//            String hello = "hello";
+//            String fromId = "ule270";
+//            String toId = "ChristaR";
+//            Message mess = new Message(hello, fromId, toId);
+//            String message = maps.writeValueAsString(mess);
+//            HttpRequest request1 = (HttpRequest) HttpRequest.newBuilder()
+//                    .uri(new URI("http://zipcode.rocks:8085/ids/ule/messages"))
+//                    .POST(HttpRequest.BodyPublishers.ofString(message))
+//                    .build();
+//            HttpResponse<String> response1 = HttpClient
+//                .newBuilder()
+//                .build()
+//                .send(request1, HttpResponse.BodyHandlers.ofString());
+//            System.out.println(response1.body());
+//        } catch (Exception e) {
+//            System.out.printf("error" + e);
+//
+//        }
     }
 }
