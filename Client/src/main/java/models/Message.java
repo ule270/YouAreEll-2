@@ -75,7 +75,6 @@ public class Message implements Comparable {
 //    }
 
     public String getSeqId() {
-
         return seqId;
     }
 }

@@ -17,10 +17,18 @@ import com.fasterxml.jackson.databind.*;
 import models.Id;
 import models.Message;
 
+import javax.naming.directory.InitialDirContext;
+
 public class IdController {
     private HashMap<String, Id> allIds;
 
     Id myId;
+    public IdController(){
+        ArrayList<Id> idsGotten = getIds();
+        for (Id i: idsGotten){
+            allIds.put(i.getuserid(), i);
+        }
+    }
 
     public ArrayList<Id> getIds() {
         try {

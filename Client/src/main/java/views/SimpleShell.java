@@ -71,20 +71,25 @@ public class SimpleShell {
                 // Specific Commands.
 
                 // ids
-            if (list.contains("ids")) {
+                if (list.contains("ids")) {
                     IdController control = new IdController();
                     ArrayList<Id> results = control.getIds();
                     SimpleShell.prettyPrint(String.valueOf(results));
                     continue;
-            }
+                }
 
                 // messages
-                if (list.contains("messages")) {
+                if (list.contains("messages") && commands.length < 2) {
                     MessageController mControl = new MessageController();
                     ArrayList<Message> results = mControl.getMessagesForId(commands[1]);
-                    for(Message m : results){
+                    for (Message m : results) {
                         SimpleShell.prettyPrint(String.valueOf(m));
                     }
+                    continue;
+                } else if (list.contains("messages")) {
+                    MessageController messControl = new MessageController();
+                    Message messRetrieved = messControl.getMessageForSequence(commands[1], commands[2]);
+                    SimpleShell.prettyPrint(String.valueOf(messRetrieved));
                     continue;
                 }
 
