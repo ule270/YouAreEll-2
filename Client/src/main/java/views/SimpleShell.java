@@ -15,7 +15,9 @@ import youareell.YouAreEll;
 
 // Simple Shell is a Console view for youareell.YouAreEll.
 public class SimpleShell {
-    Id webber = new Id();
+    String name;
+    String id;
+    Id webber = new Id(name, id);
 
     public static void prettyPrint(String output) {
         // yep, make an effort to format things nicely, eh?
@@ -74,12 +76,12 @@ public class SimpleShell {
                     ArrayList<Id> results = control.getIds();
                     SimpleShell.prettyPrint(String.valueOf(results));
                     continue;
-                }
+            }
 
                 // messages
                 if (list.contains("messages")) {
                     MessageController mControl = new MessageController();
-                    ArrayList<Message> results = mControl.getMessages();
+                    ArrayList<Message> results = mControl.getMessagesForId(commands[1]);
                     for(Message m : results){
                         SimpleShell.prettyPrint(String.valueOf(m));
                     }

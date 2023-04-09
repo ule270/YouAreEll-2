@@ -42,10 +42,10 @@ public class MessageController {
         }
         return null;
     }
-    public ArrayList<Message> getMessagesForId(String Id) {
+    public ArrayList<Message> getMessagesForId(String id) {
         try {
             HttpRequest request = (HttpRequest) HttpRequest.newBuilder()
-                    .uri(new URI("http://zipcode.rocks:8085/ids/"+ Id+"messages"))
+                    .uri(new URI("http://zipcode.rocks:8085/ids/"+ id +"/messages"))
                     .GET()
                     .build();
             HttpResponse<String> response = HttpClient
@@ -57,6 +57,7 @@ public class MessageController {
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
             String body = response.body();
+            System.out.println(body);
             List<Message> messList = objectMapper.readValue(body, new TypeReference<List<Message>>() {
             });
             return (ArrayList<Message>) messList;
@@ -95,8 +96,10 @@ public class MessageController {
 
     public static void main (String[]args){
         MessageController con = new MessageController();
-        ArrayList<Message> result = con.getMessagesForId("ule270");
-
+        String name = "Uyen";
+        String git = "ule270";
+        Id id = new Id(name, git);
+        ArrayList<Message> result = con.getMessagesForId(String.valueOf(id));
     }
  
 }
