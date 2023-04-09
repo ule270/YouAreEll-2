@@ -70,7 +70,7 @@ public class IdController {
         return null;
     }
 
-    public static void main(String[] args){
+//    public static void main(String[] args){
 //        try {
 //            HttpRequest request = (HttpRequest) HttpRequest.newBuilder()
 //                    .uri(new URI("http://zipcode.rocks:8085/ids"))
@@ -117,5 +117,5 @@ public class IdController {
 //            System.out.printf("error" + e);
 //
 //        }
-    }
+//    }
 }

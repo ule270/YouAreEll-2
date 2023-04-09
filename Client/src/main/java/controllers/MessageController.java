@@ -114,11 +114,5 @@ public class MessageController {
         }
         return null;
     }
-
-    public static void main (String[]args){
-//        MessageController con = new MessageController();
-//        Id id = new Id();
-//        ArrayList<Message> result = con.getMessagesForId(String.valueOf(id));
-    }
  
 }
