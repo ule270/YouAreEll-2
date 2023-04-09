@@ -79,8 +79,10 @@ public class SimpleShell {
                 // messages
                 if (list.contains("messages")) {
                     MessageController mControl = new MessageController();
-                    ArrayList<Message> results = mControl.getMessagesForId(commands[1]);
-                    SimpleShell.prettyPrint(String.valueOf(results));
+                    ArrayList<Message> results = mControl.getMessages();
+                    for(Message m : results){
+                        SimpleShell.prettyPrint(String.valueOf(m));
+                    }
                     continue;
                 }
 
@@ -112,7 +114,6 @@ public class SimpleShell {
                  while ((line = br.readLine()) != null)
                      System.out.println(line);
                  br.close();
-
 
             }
 

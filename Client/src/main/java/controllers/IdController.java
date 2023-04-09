@@ -45,7 +45,7 @@ public class IdController {
 //                System.out.println(idList.get(i).toString()+ "");
 //            }
         } catch (Exception e) {
-            System.out.printf("error" + e);
+            System.out.println("error" + e);
         }
         return null;
     }
@@ -86,12 +86,12 @@ public class IdController {
 //            }
 //
 //        } catch (Exception e) {
-//            System.out.printf("error" + e);
+//            System.out.println("error" + e);
 //
 //        }
 //        try {
 //            ObjectMapper maps = new ObjectMapper();
-//            String hello = "hello";
+//            String hello = "testing #2";
 //            String fromId = "ule270";
 //            String toId = "ChristaR";
 //            Message mess = new Message(hello, fromId, toId);

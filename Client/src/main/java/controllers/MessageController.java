@@ -38,7 +38,7 @@ public class MessageController {
             });
             return (ArrayList<Message>) messList;
         } catch (Exception e) {
-            System.out.printf("error" + e);
+            System.out.println("error" + e);
         }
         return null;
     }
@@ -61,7 +61,7 @@ public class MessageController {
             });
             return (ArrayList<Message>) messList;
         } catch (Exception e) {
-            System.out.printf("error" + e);
+            System.out.println("error" + e);
         }
         return null;
     }
@@ -74,24 +74,29 @@ public class MessageController {
     }
 
     public Message postMessage(Id myId, Id toId, Message msg) {
-//        try {
-//            ObjectMapper maps = new ObjectMapper();
-//            Message mess = new Message(msg, myId, toId);
-//            String message = maps.writeValueAsString(mess);
-//            HttpRequest request1 = (HttpRequest) HttpRequest.newBuilder()
-//                    .uri(new URI("http://zipcode.rocks:8085/ids/ule/messages"))
-//                    .POST(HttpRequest.BodyPublishers.ofString(message))
-//                    .build();
-//            HttpResponse<String> response1 = HttpClient
-//                    .newBuilder()
-//                    .build()
-//                    .send(request1, HttpResponse.BodyHandlers.ofString());
-//            System.out.println(response1.body());
-//        } catch (Exception e) {
-//            System.out.printf("error" + e);
-//
-//        }
+        try {
+            ObjectMapper maps = new ObjectMapper();
+            Message mess = new Message(msg.toString(), myId.toString(), toId.toString());
+            String message = maps.writeValueAsString(mess);
+            HttpRequest request1 = (HttpRequest) HttpRequest.newBuilder()
+                    .uri(new URI("http://zipcode.rocks:8085/ids/"+ toId.toString() +"/messages"))
+                    .POST(HttpRequest.BodyPublishers.ofString(message))
+                    .build();
+            HttpResponse<String> response1 = HttpClient
+                    .newBuilder()
+                    .build()
+                    .send(request1, HttpResponse.BodyHandlers.ofString());
+            System.out.println(response1.body());
+        } catch (Exception e) {
+            System.out.printf("error" + e);
+        }
         return null;
+    }
+
+    public static void main (String[]args){
+        MessageController con = new MessageController();
+        ArrayList<Message> result = con.getMessagesForId("ule270");
+
     }
  
 }
