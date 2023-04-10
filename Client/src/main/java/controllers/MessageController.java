@@ -91,7 +91,29 @@ public class MessageController {
         }
         return null;
     }
-    public ArrayList<Message> getMessagesFromFriend(Id myId, Id friendId) {
+    public Message getMessagesFromFriend(Id myId, Id friendId) {
+        try {
+            HttpRequest request = (HttpRequest) HttpRequest.newBuilder()
+                    .uri(new URI("http://zipcode.rocks:8085/ids/"+ myId.toString() +"/messages/" + friendId.toString()))
+                    .GET()
+                    .build();
+            HttpResponse<String> response = HttpClient
+                    .newBuilder()
+                    .build()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+//            System.out.println(response);
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            String body = response.body();
+//            System.out.println(body);
+            Message newM = new Message();
+            newM = objectMapper.readValue(body, new TypeReference<Message>() {
+            });
+            return newM;
+        } catch (Exception e) {
+            System.out.println("error" + e);
+        }
         return null;
     }
 
